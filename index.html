@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: url('christmas_card.png') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #card {
+      width: 80vmin;
+      height: 80vmin;
+      max-width: 800px;
+      max-height: 800px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #card-content {
+      padding: 0px;
+      text-align: center;
+      color: #333;
+      position: relative; /* Đặt vị trí tương đối để có thể đặt tuyến tính vị trí cho các cây thông */
+    }
+
+    #gift-box {
+      width: 100px;
+      height: 100px;
+      background: url('new_gift_box_image.png') no-repeat center center/cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #ff8c00;
+      cursor: pointer;
+      position: fixed;
+      top: 80%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 20px auto; /* Đưa avatar ra giữa theo chiều ngang */
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .christmas-tree {
+      width: 100px;
+      height: 180px;
+      position: absolute;
+      top: 65%; /* Đặt tuyến tính vị trí ở giữa theo chiều dọc */
+      transform: translateY(-50%);
+    }
+    .christmas-tree1 {
+      width: 100px;
+      height: 180px;
+      position: absolute;
+      top: 105%; /* Đặt tuyến tính vị trí ở giữa theo chiều dọc */
+      transform: translateY(-50%);
+    }
+    .christmas-tree2 {
+      width: 100px;
+      height: 180px;
+      position: absolute;
+      top: 130%; /* Đặt tuyến tính vị trí ở giữa theo chiều dọc */
+      transform: translateY(-50%);
+    }
+    #tree-left {
+      left: 0%; /* Đặt tuyến tính vị trí ở gần mép trái */
+    }
+
+    #tree-right {
+      right: 0%; /* Đặt tuyến tính vị trí ở gần mép phải */
+    }
+    #tree-left1 {
+      left: 2%; /* Đặt tuyến tính vị trí ở gần mép trái */
+    }
+
+    #tree-right1 {
+      right: 2%; /* Đặt tuyến tính vị trí ở gần mép phải */
+    }
+    #tree-left2 {
+      left: 14%; /* Đặt tuyến tính vị trí ở gần mép trái */
+    }
+
+    #tree-right2 {
+      right: 14%; /* Đặt tuyến tính vị trí ở gần mép phải */
+    }
+    #song-input {
+      width: 40%; /* Độ rộng của textbox */
+      padding: 10px;
+      margin-top: 0px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    /* Snowflake animation */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      background: #fff;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      transform-origin: center;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(70vh);
+      }
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="card">
+    <div id="card-content">
+      <h2>Merry Christmas!</h2>
+      <p>Chúc em giáng sinh luôn dáng xinh, nhiều niềm vui và may mắn 💙</p>
+      <div id="gift-box" onclick="toggleGift()"></div>
+      <span>Click để mở quà nha 🎁</span>
+      <div id="avatar"></div>
+      <input type="text" id="song-input" placeholder="Nguyễn Hương Giangg">
+      <a href="https://www.facebook.com/profile.php?id=100093282003231" target="_blank">
+        <img src="fb.png" alt="fb.com" style="width: 40px; height: 54px; position: absolute; top: calc(96% + 10px); left: 40%; transform: translateX(-50%);">
+      </a>
+      <a href="https://www.instagram.com/huonggiang2786/" target="_blank">
+        <img src="ig.png" alt="fb.com" style="width: 40px; height: 40px; position: absolute; top: calc(98.5% + 10px); left: 60%; transform: translateX(-50%);">
+      </a>
+      <img src="christmas_tree.png" alt="Christmas Tree" class="christmas-tree" id="tree-left">
+      <img src="christmas_tree.png" alt="Christmas Tree" class="christmas-tree" id="tree-right">
+      <img src="christmas_tree.png" alt="Christmas Tree" class="christmas-tree1" id="tree-left1">
+      <img src="christmas_tree.png" alt="Christmas Tree" class="christmas-tree1" id="tree-right1">
+      <img src="christmas_tree.png" alt="Christmas Tree" class="christmas-tree2" id="tree-left2">
+      <img src="christmas_tree.png" alt="Christmas Tree" class="christmas-tree2" id="tree-right2">
+      <audio id="myAudio" src="your_music.mp3" type="audio/mp3" loop></audio>
+    </div>
+  </div>
+    <!-- Snowflakes container -->
+    <div id="snowflakes-container"></div>
+
+  <script>
+    let musicPlaying = true;
+    let surpriseShown = false;
+
+    function toggleGift() {
+      if (!surpriseShown) {
+        surpriseShown = true;
+        alert("Click tiếp vào hộp quà đi Milk 🎉🎉🎉");
+      }
+      showAvatar();
+      toggleMusic();
+    }
+
+    function showAvatar() {
+      var avatar = document.getElementById("avatar");
+      avatar.style.background = "url('avatar.png') no-repeat center center/cover";
+      avatar.style.transform = "translateX(200px)";
+    }
+
+    function toggleMusic() {
+      const audio = document.getElementById("myAudio");
+      const avatar = document.getElementById("avatar");
+
+      if (musicPlaying) {
+        audio.pause();
+        avatar.style.transform = "rotate(0deg)";
+      } else {
+        audio.play();
+        avatar.style.transform = "rotate(360deg)";
+      }
+      musicPlaying = !musicPlaying;
+    }
+    // Function to create snowflakes
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.className = "snowflake";
+      snowflake.style.left = `${Math.random() * 100}vw`;
+      document.getElementById("snowflakes-container").appendChild(snowflake);
+      return snowflake;
+    }
+
+     // Function to start the snowfall animation
+  function startSnowfall() {
+    setInterval(function() {
+      const snowflake = createSnowflake();
+      animateSnowflake(snowflake);
+    }, 100);
+  }
+
+  // Function to animate a snowflake
+    function animateSnowflake(snowflake) {
+    const animationDuration = Math.random() * 4 + 2; // Between 2 and 6 seconds
+    const rotationDuration = Math.random() * 2 + 1; // Between 1 and 3 seconds
+
+    snowflake.style.animation = `
+      fall linear ${animationDuration}s,
+      rotate linear ${rotationDuration}s infinite
+    `;
+
+    snowflake.addEventListener("animationend", function() {
+      snowflake.remove();
+    });
+  }
+
+  // Start the snowfall
+  startSnowfall();
+
+
+  </script>
+</body>
+</html>
