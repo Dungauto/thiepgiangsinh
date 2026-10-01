@@ -16,10 +16,18 @@ let cardData = {
   nickname: "",
   wish: WISH_PRESETS[0],
   avatar: "assets/images/avatar.png",
-  fbUrl: "https://www.facebook.com/",
+  fbUrl: "https://www.facebook.com/me",
   igUrl: "https://www.instagram.com/",
   trackIndex: 0
 };
+
+// Purge any legacy cached data
+try {
+  const rawSaved = localStorage.getItem("christmas_card_custom_data");
+  if (rawSaved && (rawSaved.includes("Giang") || rawSaved.includes("100093282003231") || rawSaved.includes("huonggiang"))) {
+    localStorage.removeItem("christmas_card_custom_data");
+  }
+} catch (e) {}
 
 let currentWishIndex = 0;
 let typewriterTimeout = null;
@@ -44,13 +52,13 @@ function loadSavedOrUrlData() {
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
-      if (parsed.name === "Hương Giang") {
-        parsed.name = "My Girl cute";
-        parsed.nickname = "";
+      if (parsed.name && (parsed.name.includes("Giang") || parsed.nickname?.includes("Milk") || parsed.fbUrl?.includes("100093282003231"))) {
+        localStorage.removeItem("christmas_card_custom_data");
+      } else {
+        cardData = { ...cardData, ...parsed };
       }
-      cardData = { ...cardData, ...parsed };
     } catch (e) {
-      console.error("Failed to parse saved card data", e);
+      localStorage.removeItem("christmas_card_custom_data");
     }
   }
 
@@ -80,14 +88,14 @@ function applyCardDataToUI() {
   document.getElementById("display-avatar").src = cardData.avatar;
   document.getElementById("modal-avatar-preview").src = cardData.avatar;
 
-  document.getElementById("link-facebook").href = cardData.fbUrl || "#";
-  document.getElementById("link-instagram").href = cardData.igUrl || "#";
+  document.getElementById("link-facebook").href = cardData.fbUrl || "https://www.facebook.com/me";
+  document.getElementById("link-instagram").href = cardData.igUrl || "https://www.instagram.com/";
 
   document.getElementById("input-girl-name").value = cardData.name;
   document.getElementById("input-girl-nick").value = cardData.nickname;
   document.getElementById("input-wish-msg").value = cardData.wish;
-  document.getElementById("input-fb-url").value = cardData.fbUrl;
-  document.getElementById("input-ig-url").value = cardData.igUrl;
+  document.getElementById("input-fb-url").value = cardData.fbUrl || "https://www.facebook.com/me";
+  document.getElementById("input-ig-url").value = cardData.igUrl || "https://www.instagram.com/";
   document.getElementById("select-bg-music").value = cardData.trackIndex;
 }
 
@@ -240,8 +248,8 @@ function saveCustomCard() {
   cardData.name = document.getElementById("input-girl-name").value.trim() || "Em";
   cardData.nickname = document.getElementById("input-girl-nick").value.trim();
   cardData.wish = document.getElementById("input-wish-msg").value.trim() || WISH_PRESETS[0];
-  cardData.fbUrl = document.getElementById("input-fb-url").value.trim();
-  cardData.igUrl = document.getElementById("input-ig-url").value.trim();
+  cardData.fbUrl = document.getElementById("input-fb-url").value.trim() || "https://www.facebook.com/me";
+  cardData.igUrl = document.getElementById("input-ig-url").value.trim() || "https://www.instagram.com/";
   cardData.trackIndex = parseInt(document.getElementById("select-bg-music").value);
 
   try {
