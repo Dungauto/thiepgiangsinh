@@ -7,7 +7,7 @@
   <meta name="description" content="Thiệp chúc mừng Giáng sinh tương tác 3D lãng mạn với âm nhạc, hiệu ứng tuyết rơi và tùy biến thông tin cá nhân">
   
   <!-- Favicon -->
-  <link rel="icon" href="assets/images/avatar.png" type="image/png">
+  <link rel="icon" href="assets/images/avatar_santa.png?v=2" type="image/png">
 
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,9 +36,12 @@
 
   <!-- Top Toolbar -->
   <div class="top-toolbar">
+    <button class="tool-btn btn-lang" id="btn-lang-toggle" onclick="toggleLanguage()" title="Chuyển ngôn ngữ / Switch Language">
+      🇺🇸 EN
+    </button>
     <button class="tool-btn btn-customize" onclick="openModal()" title="Chỉnh sửa thông tin thiệp">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
-      <span>Tạo Thiệp Riêng</span>
+      <span id="btn-customizer-text">Tạo Thiệp Riêng</span>
     </button>
     <button class="tool-btn" id="btn-snowstorm" onclick="toggleSnowstorm()" title="Tăng hiệu ứng bão tuyết">
       <i class="fa-solid fa-snowflake"></i>
@@ -65,7 +68,7 @@
       </div>
       <div class="open-prompt">
         <i class="fa-solid fa-heart"></i>
-        <span>Nhấn vào hộp quà để mở điều bất ngờ! 🎁</span>
+        <span id="open-prompt-text">Nhấn vào hộp quà để mở điều bất ngờ! 🎁</span>
       </div>
     </section>
 
@@ -89,7 +92,7 @@
         <div class="avatar-wrapper" id="avatar-container">
           <div class="avatar-wreath"></div>
           <div class="avatar-img-container">
-            <img src="assets/images/avatar.png" alt="Ảnh kỷ niệm" class="avatar-img" id="display-avatar">
+            <img src="assets/images/avatar_santa.png?v=2" alt="Ảnh kỷ niệm" class="avatar-img" id="display-avatar">
           </div>
           <div class="music-badge" onclick="toggleMusic(event)" title="Bật/Tắt nhạc">
             <i class="fa-solid fa-music" id="avatar-music-icon"></i>
@@ -106,13 +109,13 @@
         <!-- Wish Preset Actions -->
         <div class="wish-actions">
           <button class="btn-wish-action" onclick="replayTyping()">
-            <i class="fa-solid fa-rotate-right"></i> Đọc lại
+            <i class="fa-solid fa-rotate-right"></i> <span id="btn-replay-text">Đọc lại</span>
           </button>
           <button class="btn-wish-action" onclick="cycleRandomWish()">
-            <i class="fa-solid fa-shuffle"></i> Đổi lời chúc khác
+            <i class="fa-solid fa-shuffle"></i> <span id="btn-change-wish-text">Đổi lời chúc khác</span>
           </button>
           <button class="btn-wish-action" onclick="triggerMagicSparkles()">
-            <i class="fa-solid fa-sparkles"></i> Thả tim & sao
+            <i class="fa-solid fa-sparkles"></i> <span id="btn-sparkles-text">Thả tim & sao</span>
           </button>
         </div>
 
@@ -180,7 +183,7 @@
       <div class="form-group">
         <label for="input-avatar-file"><i class="fa-solid fa-image"></i> Ảnh đại diện:</label>
         <div class="avatar-preview-box">
-          <img src="assets/images/avatar.png" alt="Preview" class="avatar-preview-thumb" id="modal-avatar-preview">
+          <img src="assets/images/avatar_santa.png?v=2" alt="Preview" class="avatar-preview-thumb" id="modal-avatar-preview">
           <label class="btn-file">
             <i class="fa-solid fa-cloud-arrow-up"></i> Chọn ảnh từ máy
             <input type="file" id="input-avatar-file" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
