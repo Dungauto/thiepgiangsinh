@@ -430,7 +430,7 @@ body {
   border: 4px solid #fff;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   position: relative;
-  background: #eee;
+  background: radial-gradient(circle, #fff5f5 0%, #fed7d7 100%);
 }
 
 .avatar-img {
