@@ -12,12 +12,12 @@ const WISH_PRESETS = [
 ];
 
 let cardData = {
-  name: "Hương Giang",
-  nickname: "Giang Milk",
+  name: "My Girl cute",
+  nickname: "",
   wish: WISH_PRESETS[0],
   avatar: "assets/images/avatar.png",
-  fbUrl: "https://www.facebook.com/profile.php?id=100093282003231",
-  igUrl: "https://www.instagram.com/huonggiang2786/",
+  fbUrl: "https://www.facebook.com/",
+  igUrl: "https://www.instagram.com/",
   trackIndex: 0
 };
 
@@ -44,6 +44,10 @@ function loadSavedOrUrlData() {
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
+      if (parsed.name === "Hương Giang") {
+        parsed.name = "My Girl cute";
+        parsed.nickname = "";
+      }
       cardData = { ...cardData, ...parsed };
     } catch (e) {
       console.error("Failed to parse saved card data", e);
