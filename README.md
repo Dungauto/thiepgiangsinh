@@ -6,11 +6,17 @@
 </p>
 
 <p align="center">
+  <a href="https://dungautomation-dev.github.io/thiepgiangsinh/"><img src="https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-00e5ff?style=for-the-badge&logo=githubpages&logoColor=black" alt="Live Demo"></a>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
   <img src="https://img.shields.io/badge/Responsive-Mobile%20%26%20Desktop-success?style=for-the-badge" alt="Responsive">
   <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
+</p>
+
+<p align="center">
+  🌐 <strong>Trải nghiệm trực tuyến tại:</strong><br>
+  👉 <a href="https://dungautomation-dev.github.io/thiepgiangsinh/"><strong>https://dungautomation-dev.github.io/thiepgiangsinh/</strong></a>
 </p>
 
 <p align="center">
